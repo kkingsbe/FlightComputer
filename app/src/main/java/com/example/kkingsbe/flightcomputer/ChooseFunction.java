@@ -42,6 +42,9 @@ public class ChooseFunction extends AppCompatActivity {
                 if(functionItems.get(position).getText().equals("Pressure & Density Altitude Calculator")){
                     Intent intent = new Intent(ChooseFunction.this, PressureAndDensityAlt.class);
                     startActivity(intent);
+                } else if(functionItems.get(position).getText().equals("Weight and Balance")){
+                    Intent intent = new Intent(ChooseFunction.this, WeightAndBalance.class);
+                    startActivity(intent);
                 }
             }
         });

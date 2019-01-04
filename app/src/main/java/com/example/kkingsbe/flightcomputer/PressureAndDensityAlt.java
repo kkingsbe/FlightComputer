@@ -57,11 +57,7 @@ public class PressureAndDensityAlt extends AppCompatActivity {
         int alt = Integer.parseInt(altEditText.getText().toString());
         double inHg = Double.parseDouble(altimeterEditText.getText().toString());
 
-        double difference = (inHg - 29.92) * 1000;
-
-        double pa;
-        if(inHg > 29.92) pa = alt + difference;
-        else pa = alt - difference;
+        double pa = ((29.92 - inHg) * 1000) + alt;
 
         pressureAlt = (int)Math.round(pa);
         return pressureAlt;
@@ -69,11 +65,15 @@ public class PressureAndDensityAlt extends AppCompatActivity {
 
     private int calculateDensityAltitude(){
         EditText airTempEditText = findViewById(R.id.airTempEditText);
-        int oat = Integer.parseInt(airTempEditText.getText().toString());
+        EditText altEditText = findViewById(R.id.altEditText);
 
+        double oat = Double.parseDouble(airTempEditText.getText().toString());
+        int alt = Integer.parseInt(altEditText.getText().toString());
+
+        int isaTemp = 15+((alt/1000 * -2));
         double da;
-        da = pressureAlt + (120 * ((double)oat - 15));
-        return (int)Math.round(da);
+        da = pressureAlt + (120 * (1 + oat - isaTemp));
+        return (int)da;
     }
 
     public void goBack(View v){
